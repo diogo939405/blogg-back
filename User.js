@@ -1,33 +1,37 @@
 const mongoose = require('mongoose');
+
+const ChapterSchema = new mongoose.Schema({
+    titulo: {
+        type: String,
+        required: true,
+    },
+    texto: {
+        type: String,
+        required: true,
+    },
+});
+
 const DataSchema = new mongoose.Schema({
     autor: {
         type: String,
-        required: true
+        required: true,
     },
-    capituloUm: {
+    titulo: {
         type: String,
-        required: true
+        required: true,
     },
-    capituloDois: {
+    descricao: {
         type: String,
-        required: true
+        required: true,
     },
-    capituloTres: {
-        type: Date,
-        required: true
+    imagem: {
+        type: String,
     },
-    capituloQuatro: {
-        type: Date,
-        required: true
+    capitulos: {
+        type: [ChapterSchema], // Array de objetos do esquema ChapterSchema
+        required: true,
     },
-    capituloCinco: {
-        type: Date,
-        required: true
-    },
-    capituloSeis: {
-        type: Date,
-        required: true
-    }
 });
-const DataModel = mongoose.model("DataModel", DataSchema)
-module.exports = DataModel
+
+const DataModel = mongoose.model("DataModel", DataSchema);
+module.exports = DataModel;
