@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const DataModel = require("./User.js");
 const cors = require('cors');
 const app = express();
-const axios = require('axios');
+// const axios = require('axios');
 
 
 app.use(express.json());
@@ -68,11 +68,7 @@ app.delete('/project/:id', async (req, res) => {
         return res.status(500).json({ error: err.message });
     }
 });
-setInterval(() => {
-    axios.get('https://blogg-back.onrender.com/project')
-        .then(() => console.log('Keep-alive request sent'))
-        .catch(err => console.error('Keep-alive error:', err));
-}, 300000); // 5 minutos
+
 
 // Conexão com o banco de dados
 mongoose.connect('mongodb+srv://diogoBlog:MnELDhks9C15YVms@blogcluster.5myox.mongodb.net/', {
