@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const ChapterSchema = new mongoose.Schema({
+// Subcapítulos
+const SubChapterSchema = new mongoose.Schema({
     titulo: {
         type: String,
         required: true,
@@ -11,10 +12,30 @@ const ChapterSchema = new mongoose.Schema({
     },
 });
 
+// Capítulos
+const ChapterSchema = new mongoose.Schema({
+    titulo: {
+        type: String,
+        required: true,
+    },
+    texto: {
+        type: String,
+        required: true,
+    },
+    subCapitulos: {
+        type: [SubChapterSchema], // Array de subcapítulos dentro de cada capítulo
+        required: true,
+    },
+});
+
+// Dados principais
 const DataSchema = new mongoose.Schema({
     autor: {
         type: String,
         required: true,
+    },
+    infoAutor: {
+        type: String,
     },
     titulo: {
         type: String,
@@ -24,11 +45,8 @@ const DataSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    imagem: {
-        type: String,
-    },
     capitulos: {
-        type: [ChapterSchema], // Array de objetos do esquema ChapterSchema
+        type: [ChapterSchema], // Array de capítulos
         required: true,
     },
 });
