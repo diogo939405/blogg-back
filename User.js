@@ -12,6 +12,7 @@ const SubChapterSchema = new mongoose.Schema({
     },
     rodape: {
         type: String,
+        required: true,
 
     }
 });
