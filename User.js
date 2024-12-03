@@ -10,6 +10,10 @@ const SubChapterSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    rodape: {
+        type: String,
+
+    }
 });
 
 // Capítulos
