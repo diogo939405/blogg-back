@@ -41,14 +41,15 @@ app.post('/project', async (req, res) => {
         const data = req.body;
 
         // Validar o conteúdo dos capítulos (opcional)
-        if (!data.capitulos || !Array.isArray(data.capitulos)) {
-            return res.status(400).json({ error: "Capítulos devem ser um array" });
-        }
+        // if (!data.capitulos || !Array.isArray(data.capitulos)) {
+        //     return res.status(400).json({ error: "Capítulos devem ser um array" });
+        // }
 
         const project = new DataModel(data);
         await project.save();
         return res.status(201).json(project);
     } catch (err) {
+        console.error(err);
         return res.status(500).json({ error: err.message });
     }
 });
@@ -64,6 +65,23 @@ app.delete('/project/:id', async (req, res) => {
         }
 
         return res.json(projectDelete);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+});
+
+app.put('/project/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+
+        const updatedProject = await DataModel.findByIdAndUpdate(id, data, { new: true });
+
+        if (!updatedProject) {
+            return res.status(404).json({ error: "Projeto não encontrado" });
+        }
+
+        return res.json(updatedProject);
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }

@@ -45,6 +45,7 @@ const DataSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
     capitulos: {
         type: [ChapterSchema], // Array de capítulos
         required: true,
